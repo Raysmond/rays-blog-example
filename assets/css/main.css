@@ -1,0 +1,8 @@
+body{
+    font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif;
+    line-height: 1.6;
+}
+
+#content{
+    min-height: 400px;
+}
