@@ -3,13 +3,13 @@
  * User model
  *
  * @author: Raysmond
- * @created: 2013-12-19
+ * @created: 2014-01-01
  */
 
 class User extends RModel implements RAuthProvider
 {
 
-    public $id, $role, $name, $email, $password;
+    public $id, $role, $name, $email, $password, $status, $registerTime, $loginTime;
 
     public static $primary_key = "id";
     public static $table = "user";
@@ -19,9 +19,12 @@ class User extends RModel implements RAuthProvider
         "name" => "name",
         "email" => "email",
         "password" => "password",
+        "status" => "status",
+        "registerTime" => "create_time",
+        "loginTime" => "last_login_time",
     );
 
-    public static $protected = array("uid","role");
+    public static $protected = array("uid", "role");
 
     public static $rules = array(
         "name" => array("label" => "User name", "rules" => "trim|required|min_length[4]|max_length[255]"),
@@ -39,6 +42,16 @@ class User extends RModel implements RAuthProvider
         $rules[] = array("field" => "password-confirm", "label" => "Password confirm", "rules" => "trim|required|min_length[4]|max_length[255]|equals[password]");
         return $rules;
     }
+
+    public function updateLogin()
+    {
+        if (isset($this->id)) {
+            $this->loginTime = date('Y-m-d H:i:s');
+            $this->save();
+        }
+    }
+
+    /* RAuthProvider implementation */
 
     /**
      * Implement identifier() method

@@ -3,6 +3,7 @@
  * Index file.
  *
  * @author: Raysmond
+ * @created: 2014-01-01
  */
 
 $Rays = dirname(__FILE__).'/Rays/Rays/Rays.php';

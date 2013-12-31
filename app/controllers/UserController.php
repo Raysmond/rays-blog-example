@@ -3,7 +3,7 @@
  * UserController class
  *
  * @author: Raysmond
- * @created: 2013-12-20
+ * @created: 2014-01-01
  */
 
 class UserController extends RController

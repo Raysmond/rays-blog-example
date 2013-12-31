@@ -24,7 +24,7 @@ return array(
         'user' => 'root',
         'password' => '',
         'db_name' => 'raysmond',
-        'table_prefix' => '',
+        'table_prefix' => 'rays_',
         'charset' => 'utf8',
     ),
 

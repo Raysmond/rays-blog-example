@@ -3,7 +3,7 @@
  * PostController class
  *
  * @author: Raysmond
- * @created: 2013-12-20
+ * @created: 2014-01-01
  */
 
 class PostController extends RController
