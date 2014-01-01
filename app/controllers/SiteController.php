@@ -33,6 +33,20 @@ class SiteController extends RController
         $this->render("contact");
     }
 
+    public function actionConfig()
+    {
+        $config = Variable::get("site_configuration");
+        if (Rays::isPost()) {
+            if ($config === null)
+                $config = new Variable();
+            $config->set($_POST);
+            if ($config->validate_save() === false) {
+                $this->render("config", array('config' => $config, 'errors' => $config->getErrors()));
+            }
+        }
+        $this->render("config", array('config' => $config));
+    }
+
     /**
      * Exception handling
      * @param Exception $e
