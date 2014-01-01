@@ -39,7 +39,10 @@ class Post extends RModel
 
     public static $rules = array(
         'uid' => array("label" => "Author ID", "rules" => "trim|required|number"),
+        'typeId' => array("label" => "Type ID", "rules" => "trim|required|number"),
         "title" => array("label" => "Title", "rules" => "trim|required|min_length[5]|max_length[255]"),
-        "content" => array("label" => "Content", "rules" => "trim|required|max_length[65535]")
+        "content" => array("label" => "Content", "rules" => "trim|required|max_length[65535]"),
+        "createTime" => array("label" => "Create time", "rules" => "trim|required"),
+        "updateTime" => array("type" => "update", "label" => "Update time", "rules" => "trim|required"),
     );
 } 

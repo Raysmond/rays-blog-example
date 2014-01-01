@@ -1,8 +1,12 @@
-body{
+body {
     font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif;
     line-height: 1.6;
 }
 
-#content{
+#content {
     min-height: 400px;
+}
+
+.form input, .form textarea {
+    margin: 10px 0;
 }
