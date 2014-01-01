@@ -12,3 +12,11 @@
         echo $page->content;
     } ?>
 </div>
+<div class="actions">
+    <?php
+    if (Rays::isLogin() && Rays::user()->role === User::ADMIN) {
+        echo "Actions: ";
+        echo RHtml::linkAction('page', "Edit", "edit", $page->id);
+    }
+    ?>
+</div>

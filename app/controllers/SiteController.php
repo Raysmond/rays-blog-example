@@ -18,7 +18,8 @@ class SiteController extends RController
 
     public function actionAbout()
     {
-        $this->render("about");
+        $aboutPage = Page::get(5);
+        $this->render("about", array('page' => $aboutPage));
     }
 
     public function actionContact()

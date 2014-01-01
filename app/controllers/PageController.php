@@ -50,7 +50,18 @@ class PageController extends RController
         $page = Page::get($pid);
         RAssert::not_null($page);
 
-        $this->render("edit", array("page", $page));
+        if (Rays::isPost()) {
+            $page1 = Page::get($pid);
+            $page1->set($_POST);
+            $page1->updateTime = date('Y-m-d H:i:s');
+            if ($page1->save() !== false) {
+                $this->redirectAction("page", "view", $page->id);
+            } else {
+                $this->render("edit", array('page' => $page, 'form' => $_POST, 'errors' => $page1->getErrors()));
+            }
+        }
+
+        $this->render("edit", array("page" => $page));
     }
 
     public function actionAdmin()

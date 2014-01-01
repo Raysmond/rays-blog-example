@@ -28,6 +28,11 @@ return array(
         'charset' => 'utf8',
     ),
 
+    'route' => array(
+        'about' => 'site/about',
+        'contact' => 'site/contact',
+    )
+
     /*
     'cache' => array(
         'cache_dir' => '/cache',

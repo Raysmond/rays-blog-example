@@ -1,3 +1,7 @@
+<?php if (isset($errors)) {
+    RHtml::showValidationErrors($errors);
+} ?>
+
 <h1>New page</h1>
 <?php $self->setHeaderTitle("New page"); ?>
 <?= RForm::openForm("page/new", array('class' => 'form')) ?>
