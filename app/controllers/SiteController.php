@@ -10,6 +10,9 @@ class SiteController extends RController
 {
     // public $defaultAction = "index";
     // public $layout = "index";
+    public $access = array(
+        User::ADMIN => array("config")
+    );
 
     public function actionIndex()
     {
@@ -39,12 +42,13 @@ class SiteController extends RController
         if (Rays::isPost()) {
             if ($config === null)
                 $config = new Variable();
-            $config->set($_POST);
+            // validations
+            $config->value = array_merge($config->value, $_POST);
             if ($config->validate_save() === false) {
                 $this->render("config", array('config' => $config, 'errors' => $config->getErrors()));
             }
         }
-        $this->render("config", array('config' => $config));
+        $this->render("config", array('config' => ($config === null ? null : $config->value)));
     }
 
     /**

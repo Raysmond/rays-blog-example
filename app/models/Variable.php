@@ -23,8 +23,11 @@ class Variable extends RModel
 
     public function save()
     {
+        $val = $this->value;
         $this->value = base64_encode(serialize($this->value));
-        return parent::save();
+        $result = parent::save();
+        $this->value = $val;
+        return $result;
     }
 
     public static function get($id)

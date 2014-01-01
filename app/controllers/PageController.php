@@ -41,7 +41,10 @@ class PageController extends RController
     {
         $page = Page::get($pid);
         RAssert::not_null($page);
-
+        if ($page->contentType == Page::TYPE_MARKDOWN) {
+            Rays::import("application.extensions.markdown.MarkDownUtil");
+            $page->content = MarkDownUtil::parseText($page->content);
+        }
         $this->render("view", array('page' => $page));
     }
 
