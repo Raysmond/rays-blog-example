@@ -10,7 +10,7 @@ class Post extends RModel
 {
     public $user;
     public $type;
-    public $id, $uid, $typeId, $title, $content, $summary, $createTime, $updateTime, $status;
+    public $id, $uid, $typeId, $title, $content, $summary,$contentType, $createTime, $updateTime, $status;
 
     public static $table = "post";
     public static $primary_key = "id";
@@ -24,6 +24,7 @@ class Post extends RModel
         'title' => 'title',
         'content' => 'content',
         'summary' => 'summary',
+        'contentType' => 'content_type',
         'createTime' => 'create_time',
         'updateTime' => 'update_time',
         'status' => 'status',
@@ -31,6 +32,9 @@ class Post extends RModel
 
     const STATUS_DRAFT = 0;
     const STATUS_PUBLISHED = 1;
+
+    const TYPE_HTML = "html";
+    const TYPE_MARKDOWN = "markdown";
 
     public static $relation = array(
         'user' => array('User', "[uid] = [User.id]"),

@@ -5,5 +5,10 @@
     <?= $page->createTime ?>
 </div>
 <div class="page-content">
-    <?= $page->content ?>
+    <?php if ($page->contentType === Page::TYPE_MARKDOWN) {
+        Rays::import("application.extensions.markdown.MarkDownUtil");
+        echo MarkDownUtil::parseText($page->content);
+    } else {
+        echo $page->content;
+    } ?>
 </div>

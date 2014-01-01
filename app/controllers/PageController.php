@@ -24,9 +24,9 @@ class PageController extends RController
             $page->updateTime = $page->createTime = date("Y-m-d H:i:s");
             $page->uid = Rays::user()->id;
             $page->status = Page::STATUS_PUBLISHED;
+            // use markdown syntax
+            $page->contentType = Page::TYPE_MARKDOWN;
             if ($page->validate("new")) {
-                Rays::import("application.extensions.markdown.MarkDownUtil");
-                $page->content = MarkDownUtil::parseText($page->content);
                 if (($id = $page->save()) !== false)
                     $this->redirectAction("page", "view", $id);
                 else
