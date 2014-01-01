@@ -56,9 +56,19 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
+                <?php
+                if(Rays::isLogin()){
+                    ?>
+                    <li><?=RHtml::linkAction('user',Rays::user()->name,'view',Rays::user()->id)?></li>
+                    <li><?=RHtml::linkAction('user',"Logout",'logout')?></li>
+                <?php
+                }else{
+                    ?>
+                    <li><?=RHtml::linkAction('user',"Login",'login')?></li>
+                    <li><?=RHtml::linkAction('user',"Register",'Register')?></li>
+                <?php
+                }
+                ?>
             </ul>
         </div>
         <!--/.nav-collapse -->

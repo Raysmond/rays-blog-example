@@ -1,6 +1,5 @@
 <?php
 $self->setHeaderTitle("Register"); ?>
-<h1>Register</h1>
 <?php
 if(isset($errors) && !empty($errors)){
     echo '<div>';
@@ -8,28 +7,29 @@ if(isset($errors) && !empty($errors)){
     echo '</div>';
 }
 ?>
-<?=RForm::openForm("user/register",array('class'=>'vform'))?>
+<div class="col-lg-4">
 
-<?=RForm::label("Username","name")?>
-<?=RForm::input("name",isset($form["name"])?$form["name"]:"")?>
+    <h1>Register</h1>
+    <?=RForm::openForm("user/register",array('class'=>'form'))?>
 
-<br/>
+    <?=RForm::input(array('name'=>'name','class'=>'form-control','placeholder'=>'User name'),isset($form["name"])?$form["name"]:"")?>
 
-<?=RForm::label("Email","email")?>
-<?=RForm::input("email",isset($form["email"])?$form["email"]:"")?>
+    <br/>
 
-<br/>
+    <?=RForm::input(array('name'=>'email','class'=>'form-control','placeholder'=>'Email'),isset($form["email"])?$form["email"]:"")?>
 
-<?=RForm::label("Password","password")?>
-<?=RForm::input(array('type'=>"password","name"=>"password"),isset($form["password"])?$form["password"]:"")?>
+    <br/>
 
-<br/>
+    <?=RForm::input(array('type'=>"password","name"=>"password",'class'=>'form-control','placeholder'=>'Password'),isset($form["password"])?$form["password"]:"")?>
 
-<?=RForm::label("Password confirm","password-confirm")?>
-<?=RForm::input(array('type'=>"password","name"=>"password-confirm"),isset($form["password-confirm"])?$form["password-confirm"]:"")?>
+    <br/>
 
-<br/>
+    <?=RForm::input(array('type'=>"password","name"=>"password-confirm",'class'=>'form-control','placeholder'=>'Password confirm'),isset($form["password-confirm"])?$form["password-confirm"]:"")?>
 
-<button type="submit">Register</button>
+    <br/>
 
-<?=RForm::endForm()?>
+    <?=RForm::input(array('type'=>'submit','value'=>'Register','class'=>'btn btn-default'))?>
+
+    <?=RForm::endForm()?>
+
+</div>

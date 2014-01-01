@@ -22,7 +22,7 @@ class UserController extends RController
         if (Rays::isPost()) {
             $user = new User($_POST);
             if ($user->validate("login")) {
-                if (($login = User::find("name", $user->name)->first()) !== null) {
+                if (($login = User::find("name", $user->name)->where("[status]=?", User::STATUS_ACTIVE)->first()) !== null) {
                     if ($login->password == md5($_POST["password"])) {
                         Rays::app()->login($login);
                         $this->redirect(Rays::baseUrl());
@@ -49,6 +49,8 @@ class UserController extends RController
                 $user = new User($_POST);
                 $user->password = md5($_POST["password"]);
                 $user->role = User::AUTHENTICATED;
+                $user->registerTime = date('Y-m-d H:i:s');
+                $user->status = User::STATUS_ACTIVE;
                 if ($user->save()) {
                     $this->flash("message", "Register successfully. Your username is " . $user->name . ".");
                     $this->redirectAction("user", "login");
@@ -66,11 +68,12 @@ class UserController extends RController
         $this->redirect(Rays::baseUrl());
     }
 
-    public function actionView($uid)
+    public function actionView($uid = null)
     {
-        $user = User::get($uid);
+        RAssert::not_null($uid);
+        $user = User::find("id", $uid)->where("[status]=?", User::STATUS_ACTIVE);
         RAssert::not_null($user);
 
-        $this->render("view", array("user" => $user, "posts" => Post::find("uid", $user->id)->order_desc("id")->range(0, 10)));
+        $this->render("view", array("user" => $user));
     }
 } 

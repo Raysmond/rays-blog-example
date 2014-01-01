@@ -36,6 +36,9 @@ class User extends RModel implements RAuthProvider
     const AUTHENTICATED = "authenticated";
     const ANONYMOUS = "anonymous";
 
+    const STATUS_ACTIVE = 1;
+    const STATUS_BLOCKED = 0;
+
     public static function getRegisterRules()
     {
         $rules = User::getRules("register");

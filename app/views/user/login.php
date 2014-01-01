@@ -1,24 +1,27 @@
 <?php
 $self->setHeaderTitle("Login"); ?>
-<h1>Login</h1>
-<?php
-if(isset($errors) && !empty($errors)){
-    echo '<div>';
-    RHtml::showValidationErrors($errors);
-    echo '</div>';
-}
-?>
-<?=RForm::openForm("user/login",array('class'=>'vform'))?>
+<div class="col-lg-4">
+    <h1>Login</h1>
+    <?php
+    if (isset($errors) && !empty($errors)) {
+        echo '<div>';
+        RHtml::showValidationErrors($errors);
+        echo '</div>';
+    }
+    ?>
+    <?= RForm::openForm("user/login", array('class' => 'form')) ?>
 
-<?=RForm::label("Username","name")?>
-<?=RForm::input("name",isset($form)?$form["name"]:"")?>
+    <?= RForm::label("Username", "name") ?>
+    <?= RForm::input(array('name' => 'name', "class" => 'form-control'), isset($form) ? $form["name"] : "") ?>
 
-<br/>
+    <br/>
 
-<?=RForm::label("Password","password")?>
-<?=RForm::input(array('type'=>"password","name"=>"password"),isset($form)?$form["password"]:"")?>
+    <?= RForm::label("Password", "password") ?>
+    <?= RForm::input(array('type' => "password", "name" => "password", 'class' => 'form-control'), isset($form) ? $form["password"] : "") ?>
 
-<br/>
-<button type="submit">Login</button>
+    <br/>
+    <?= RForm::input(array('type' => 'submit', "value" => 'Login', 'class' => 'btn  btn-default')) ?>
 
-<?=RForm::endForm()?>
+    <?= RForm::endForm() ?>
+
+</div>
