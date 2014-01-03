@@ -1,6 +1,6 @@
 <?php $self->setHeaderTitle($page->title); ?>
 
-<h1><?= RHtml::encode($page->title) ?></h1>
+<div class="page-header"><h1><?= RHtml::encode($page->title) ?></h1></div>
 <div class="page-meta">
     <?= $page->createTime ?>
 </div>
@@ -12,6 +12,7 @@
     if (Rays::isLogin() && Rays::user()->role === User::ADMIN) {
         echo "Actions: ";
         echo RHtml::linkAction('page', "Edit", "edit", $page->id);
+        echo "&nbsp;&nbsp;".RHtml::linkAction('page', "Delete", "delete", $page->id);
     }
     ?>
 </div>

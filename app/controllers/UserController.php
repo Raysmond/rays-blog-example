@@ -71,7 +71,7 @@ class UserController extends RController
     public function actionView($uid = null)
     {
         RAssert::not_null($uid);
-        $user = User::find("id", $uid)->where("[status]=?", User::STATUS_ACTIVE);
+        $user = User::find("id", $uid)->where("[status]=?", User::STATUS_ACTIVE)->first();
         RAssert::not_null($user);
 
         $this->render("view", array("user" => $user));

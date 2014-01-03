@@ -1,17 +1,16 @@
-<h1>New post</h1>
+<div class="page-header"><h1>New post</h1></div>
 <?php
 if (isset($errors)) {
     RHtml::showValidationErrors($errors);
 }
 ?>
-
 <?php
 if (!isset($post)){
-    echo RForm::openForm("post/new", array('class'=>'vform','style'=>'max-width: 600px;'));
+    echo RForm::openForm("post/new", array('class'=>'form'));
     $self->setHeaderTitle("New post");
 }
 else{
-    echo RForm::openForm("post/edit/" . $post->id,array('class'=>'vform','style'=>'max-width: 600px;'));
+    echo RForm::openForm("post/edit/" . $post->id,array('class'=>'form'));
     $self->setHeaderTitle("Edit " . $post->title);
 }
 ?>
@@ -21,17 +20,11 @@ else{
 <?= RForm::input(array(
     'name'=>'title',
     'value'=>isset($form['title']) ? $form["title"] : (isset($post) ? $post->title : ""),
-    'placeholder'=>'Post title')
+    'placeholder'=>'Post title',
+    'class'=>'form-control')
 ) ?>
-
-<br/>
-
 <?= RForm::label("Content", "content") ?>
 <br/>
-
-<textarea style="height: 240px;" name="content" placeholder="Post content"><?= (isset($form["content"]) ? $form["content"] : (isset($post) ? $post->content : "")) ?></textarea>
-
-<br/>
-<button type="submit">Save</button>
-
+<textarea style="height: 240px;" name="content" placeholder="Post content" class="form-control"><?= (isset($form["content"]) ? $form["content"] : (isset($post) ? $post->content : "")) ?></textarea>
+<input type="submit" value="Save post" class="btn btn-info" />
 <?= RForm::endForm() ?>

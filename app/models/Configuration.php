@@ -12,6 +12,17 @@ class Configuration
 
     const CONFIG_KEY = "site_configuration";
 
+    public static $configuration = null;
+
+    public static function getConfiguration()
+    {
+        if (null === self::$configuration) {
+            self::$configuration = new Configuration();
+            self::$configuration->load();
+        }
+        return self::$configuration;
+    }
+
     public function load()
     {
         $config = Variable::get(Configuration::CONFIG_KEY);

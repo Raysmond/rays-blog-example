@@ -1,6 +1,6 @@
 <?php $self->setHeaderTitle($page->title); ?>
 
-<h1><?= RHtml::encode($page->title) ?></h1>
+<div class="page-header"><h1><?= RHtml::encode($page->title) ?></h1></div>
 
 <div class="page-content">
     <?php if ($page->contentType === Page::TYPE_MARKDOWN) {

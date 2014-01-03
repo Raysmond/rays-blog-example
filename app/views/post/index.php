@@ -1,9 +1,7 @@
-<h1>My posts</h1>
+<div class="page-header"><h1>My Posts</h1></div>
 <?php $self->setHeaderTitle("My posts"); ?>
 <div style="margin-bottom: 20px;">
-    <a href="<?= RHtml::siteUrl("post/new") ?>">
-        <button>New post</button>
-    </a>
+    <?=RHtml::linkAction("post","+ New post","new",null,array("class"=>'btn btn-success btn-sm'))?>
 </div>
 
 <div class="post-list">
@@ -12,8 +10,7 @@
             ?>
             <div class="post-item">
                 <h2 class="post-title"><?= RHtml::linkAction("post", $post->title, "view", $post->id) ?></h2>
-
-                <div class="post-meta">Post at <?= $post->createdTime ?></div>
+                <div class="post-meta">Post at <?= $post->createTime ?></div>
                 <div class="post-content"><?= $post->content ?></div>
             </div>
             <hr>

@@ -24,10 +24,13 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="page-<?=Rays::router()->getControllerId() . "-" . Rays::router()->getActionId()?>">
 
 <!-- Fixed navbar -->
-<div class="navbar navbar-default navbar-fixed-top">
+<div id="main-nav" class="navbar navbar-default navbar-fixed-top">
+    <span
+        id="cur_uri" style="display: none;"><?= $baseUrl . "/" . Rays::router()->getControllerId() . "/" . Rays::router()->getActionId() ?></span>
+
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,35 +41,42 @@
             <a class="navbar-brand" href="#"><?= Rays::app()->getName() ?></a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="<?= Rays::baseUrl() ?>">Home</a></li>
-                <li><a href="<?= $baseUrl ?>/about">About</a></li>
-                <li><?= RHtml::linkAction("page", "Pages", "index") ?></li>
-                <li><a href="<?= $baseUrl ?>/contact">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="<?= Rays::baseUrl() ?>">Home</a></li>
+                <li><a href="<?= $baseUrl ?>/blog">Blog</a></li>
+                <li><a href="<?= $baseUrl ?>/projects">Projects</a></li>
+                <li><a href="<?= $baseUrl ?>/about">About</a></li>
+                <li><a href="<?= $baseUrl ?>/contact">Contact</a></li>
                 <?php
                 if (Rays::isLogin()) {
                     ?>
-                    <li><?= RHtml::linkAction('user', Rays::user()->name, 'view', Rays::user()->id) ?></li>
-                    <li><?= RHtml::linkAction('user', "Logout", 'logout') ?></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= Rays::user()->name ?> <b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><?= RHtml::linkAction("user", "Profile", "view", Rays::user()->id) ?></li>
+                            <li class="divider"></li>
+                            <li><?= RHtml::linkAction('user', "Logout", 'logout') ?></li>
+                        </ul>
+                    </li>
+                    <?php if(Rays::user()->role === User::ADMIN){
+                        ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuration <b
+                                    class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><?= RHtml::linkAction("site", "Site settings", "config") ?></li>
+                                <li class="divider"></li>
+                                <li><?= RHtml::linkAction("page", "Pages", "index") ?></li>
+                            </ul>
+                        </li>
+                        <?php
+                    } ?>
                 <?php
                 } else {
                     ?>
-                    <li><?= RHtml::linkAction('user', "Login", 'login') ?></li>
-                    <li><?= RHtml::linkAction('user', "Register", 'Register') ?></li>
+<!--                    <li>--><?//= RHtml::linkAction('user', "Login", 'login') ?><!--</li>-->
+<!--                    <li>--><?//= RHtml::linkAction('user', "Register", 'register') ?><!--</li>-->
                 <?php
                 }
                 ?>
@@ -76,12 +86,11 @@
     </div>
 </div>
 
-<div id="message" class="container">
-    <?= RHtml::showFlashMessages(); ?>
-</div>
-<!-- /container -->
-
-<div class="container">
+<div id="main-wrapper" class="container">
+    <div id="message" class="container">
+        <?= RHtml::showFlashMessages(); ?>
+    </div>
+    <div class="clearfix"></div>
     <div id="content">
         <?= isset($content) ? $content : "" ?>
     </div>
@@ -99,6 +108,7 @@
 
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Custom JavaScript  -->
+<script src="<?=$baseUrl?>/assets/js/main.js"></script>
 <?= RHtml::linkScriptArray(Rays::app()->client()->script); ?>
 </body>
 </html>

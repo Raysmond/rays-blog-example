@@ -1,12 +1,115 @@
 body {
     font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
+#main-wrapper{
+    min-height: 440px;
+}
 #content {
-    min-height: 400px;
+    font-size: 15px;
+}
+
+/* main navigation */
+#main-nav{
+    min-height: 40px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+#main-nav .navbar-brand {
+    padding: 10px 15px;
+    font-size: 20px;
+    font-weight: 200;
+    color: #777777;
+    text-shadow: 0 1px 0 #ffffff;
+}
+.navbar-nav > li > a {
+    padding: 10px 15px;
+}
+.page-header{
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.page-header h1{
+    margin-top: 0;
+    font-weight: bold;
+    font-family: inherit;
+    text-rendering: optimizelegibility;
 }
 
 .form input, .form textarea {
     margin: 10px 0;
+}
+
+/* front page */
+.raysmond {
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.raysmond > h1 {
+    font-size: 32px;
+    font-weight: bold;
+    border-top: 1px #eee solid;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+
+.raysmond > h1 > span {
+    display: inline-block;
+    background-color: #fff;
+    position: relative;
+    top: -28px;
+    padding: 0 20px;
+}
+
+.raysmond > img {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    -webkit-transition: 500ms;
+    -moz-transition: 500ms;
+    transition: 500ms;
+    -webkit-box-shadow: 0px 0px 2px 3px rgba(255, 255, 255, 0.7), 0px 0px 30px 8px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 0px 2px 3px rgba(255, 255, 255, 0.7), 0px 0px 30px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 2px 3px rgba(255, 255, 255, 0.7), 0px 0px 30px 8px rgba(0, 0, 0, 0.25);
+}
+
+.raysmond .about{
+    padding: 0 200px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+div.mylinks {
+    padding-top: 15px;
+    text-align: center;
+}
+
+div.mylinks > ul {
+    list-style: none;
+}
+
+div.mylinks > ul > li {
+    display: inline-block;
+    padding: 0 15px;
+}
+
+/* footer */
+#footer{
+    color: gray;
 }

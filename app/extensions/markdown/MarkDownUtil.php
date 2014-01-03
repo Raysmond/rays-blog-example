@@ -13,7 +13,10 @@ class MarkDownUtil
      */
     public static function parseText($text)
     {
-        Rays::import("application.vendors.php-markdown.Michelf.Markdown_inc");
-        return \Michelf\Markdown::defaultTransform($text);
+//        Rays::import("application.vendors.php-markdown.Michelf.Markdown_inc");
+//        return \Michelf\Markdown::defaultTransform($text);
+
+        Rays::import("application.vendors.php-markdown.Michelf.MarkdownExtra_inc");
+        return \Michelf\MarkdownExtra::defaultTransform($text);
     }
 } 

@@ -16,7 +16,14 @@ class SiteController extends RController
 
     public function actionIndex()
     {
-        $this->render("index", array());
+        $config = Configuration::getConfiguration();
+        $id = $config->getConfig("front_page_intro_id");
+        $intro = $id !== null ? Post::get($id) : null;
+        if (null !== $intro) {
+            Rays::import("application.extensions.markdown.MarkDownUtil");
+            $intro->content = MarkDownUtil::parseText($intro->content);
+        }
+        $this->render("index", array("intro" => $intro));
     }
 
     public function actionAbout()
@@ -40,6 +47,16 @@ class SiteController extends RController
     {
         $config = Variable::get("site_configuration");
         if (Rays::isPost()) {
+            if (isset($_POST["new_configs_keys"])) {
+                $keys = $_POST["new_configs_keys"];
+                $values = $_POST["new_configs_values"];
+                for ($i = 0; $i < count($keys); $i++) {
+                    if (!isset($_POST[$keys[$i]]))
+                        $_POST[$keys[$i]] = $values[$i];
+                }
+                unset($_POST["new_configs_keys"]);
+                unset($_POST["new_configs_values"]);
+            }
             if ($config === null)
                 $config = new Variable();
             // validations
@@ -51,6 +68,18 @@ class SiteController extends RController
         $this->render("config", array('config' => ($config === null ? null : $config->value)));
     }
 
+    public function actionProjects()
+    {
+        $config = Configuration::getConfiguration();
+        $id = $config->getConfig("project_page_id");
+        $page = $id !== null ? Post::get($id) : null;
+        if (null !== $page) {
+            Rays::import("application.extensions.markdown.MarkDownUtil");
+            $page->content = MarkDownUtil::parseText($page->content);
+        }
+        $this->render("projects", array("page" => $page));
+    }
+
     /**
      * Exception handling
      * @param Exception $e
@@ -58,8 +87,26 @@ class SiteController extends RController
     public function actionException(Exception $e)
     {
         if ($e instanceof RPageNotFoundException || $e->getCode() === 404) {
+            // TODO load routing at initialization
+            $config = Configuration::getConfiguration();
+            $routes = $config->getConfig("custom_routing");
+            if ($routes !== null) {
+                $routes = explode("\n", $routes);
+                foreach ($routes as $route) {
+                    if (($pos = strpos($route, "=")) !== false) {
+                        $uri = trim(substr($route, 0, $pos));
+                        $routingUri = trim(substr($route, $pos + 1));
+                        if ($uri === Rays::uri()) {
+                            $router = new RRouter();
+                            Rays::app()->runController($router->getRouteUrl($routingUri));
+                            exit;
+                        }
+                    }
+                }
+            }
+
             $this->setHeaderTitle("404");
-            $this->renderContent("<h1>404, page not found!</h1>");
+            $this->renderContent("<div class='page-header'><h1>404, page not found!</h1></div>");
             return;
         }
 

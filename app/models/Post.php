@@ -10,7 +10,7 @@ class Post extends RModel
 {
     public $user;
     public $type;
-    public $id, $uid, $typeId, $title, $content, $summary,$contentType, $createTime, $updateTime, $status;
+    public $id, $uid, $typeId, $title, $content, $summary, $contentType, $createTime, $updateTime, $status;
 
     public static $table = "post";
     public static $primary_key = "id";
@@ -49,4 +49,13 @@ class Post extends RModel
         "createTime" => array("label" => "Create time", "rules" => "trim|required"),
         "updateTime" => array("type" => "update", "label" => "Update time", "rules" => "trim|required"),
     );
+
+    public function parseContent()
+    {
+        if ($this->contentType === self::TYPE_MARKDOWN) {
+            Rays::import("application.extensions.markdown.MarkDownUtil");
+            $this->content = MarkDownUtil::parseText($this->content);
+        }
+        return $this->content;
+    }
 } 

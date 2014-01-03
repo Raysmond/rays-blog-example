@@ -19,8 +19,8 @@ class PostController extends RController
         $page = Rays::getParam("page", 1);
         $size = Rays::getParam("pagesize", 5);
 
-        $count = Post::find("uid", Rays::user()->id)->count();
-        $posts = Post::find("uid", Rays::user()->id)->order_desc("id")->range(($page - 1) * $size, $size);
+        $count = Post::find("uid", Rays::user()->id)->find("typeId", Type::TYPE_POST)->count();
+        $posts = Post::find("uid", Rays::user()->id)->find("typeId", Type::TYPE_POST)->order_desc("id")->range(($page - 1) * $size, $size);
 
         $pager = null;
         if ($count > $size) {
@@ -72,7 +72,11 @@ class PostController extends RController
         if (Rays::isPost()) {
             $post = new Post($_POST);
             $post->uid = Rays::user()->id;
-            $post->createdTime = date("Y-m-d H:i:s");
+            $post->updateTime = $post->createTime = date("Y-m-d H:i:s");
+            $post->typeId = Type::TYPE_POST;
+            $post->status = Post::STATUS_PUBLISHED;
+            // use markdown syntax
+            $post->contentType = Page::TYPE_MARKDOWN;
             if ($post->validate_save("new") === false) {
                 $this->render("edit", array("isNew" => true, "form" => $_POST, "errors" => $post->getErrors()));
                 return;

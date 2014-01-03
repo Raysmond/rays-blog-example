@@ -10,22 +10,26 @@ class Type extends RModel
 {
     public $id, $name;
 
-    public $primary_key = "id";
-    public $table = "type";
+    public static $primary_key = "id";
+    public static $table = "type";
 
-    public $mapping = array(
+    public static $mapping = array(
         'id' => 'tid',
         'name' => 'name'
     );
 
-    public $rules = array(
+    public static $rules = array(
         'name' => array("label" => "Name", "rules" => "trim|required|max_length[255]")
     );
 
     // cached "id-to-title" map
     public static $types_map = null;
 
-    public function getTypeName($typeId)
+    // TODO
+    const TYPE_POST = 2;
+    const TYPE_PAGE = 1;
+
+    public static function getTypeName($typeId)
     {
         if (!isset(Type::$types_map)) {
             $types = Type::find()->all();
