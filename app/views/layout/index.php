@@ -107,7 +107,9 @@
     <span style="float: right;">Theme based on <a href="http://getbootstrap.com/">Bootstrap</a> and powered by <a
             href="https://github.com/Raysmond/Rays">Rays</a></span>
 </div>
-
+<div style="display: none;">
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5076875'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s25.cnzz.com/stat.php%3Fid%3D5076875' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Custom JavaScript  -->
 <script src="<?=$baseUrl?>/assets/js/main.js"></script>
