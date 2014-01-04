@@ -16,11 +16,11 @@ class SiteController extends RController
 
     public function actionIndex()
     {
-//        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
-//        if (($content = $cache->get("page", "index")) !== false) {
-//            $this->renderContent($content);
-//            return;
-//        }
+        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
+        if (($content = $cache->get("page", "index")) !== false) {
+            $this->renderContent($content);
+            return;
+        }
         $config = Configuration::getConfiguration();
         $id = $config->getConfig("front_page_intro_id");
         $intro = $id !== null ? Post::get($id) : null;
@@ -28,17 +28,17 @@ class SiteController extends RController
             $intro->parseContent();
         }
         $content = $this->renderPartial("index", array("intro" => $intro), true);
-//        $cache->set("page", "index", $content);
+        $cache->set("page", "index", $content);
         $this->renderContent($content);
     }
 
     public function actionAbout()
     {
-//        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
-//        if (($content = $cache->get("page", "about")) !== false) {
-//            $this->renderContent($content);
-//            return;
-//        }
+        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
+        if (($content = $cache->get("page", "about")) !== false) {
+            $this->renderContent($content);
+            return;
+        }
         $config = Configuration::getConfiguration();
         $id = $config->getConfig("about_page_id");
         $page = $id !== null ? Post::get($id) : null;
@@ -46,7 +46,7 @@ class SiteController extends RController
             $page->parseContent();
         }
         $content = $this->renderPartial("about", array("page" => $page), true);
-//        $cache->set("page", "about", $content);
+        $cache->set("page", "about", $content);
         $this->renderContent($content);
     }
 
@@ -88,11 +88,11 @@ class SiteController extends RController
 
     public function actionProjects()
     {
-//        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
-//        if (($content = $cache->get("page", "project")) !== false) {
-//            $this->renderContent($content);
-//            return;
-//        }
+        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
+        if (($content = $cache->get("page", "project")) !== false) {
+            $this->renderContent($content);
+            return;
+        }
         $config = Configuration::getConfiguration();
         $id = $config->getConfig("project_page_id");
         $page = $id !== null ? Post::get($id) : null;
@@ -100,7 +100,7 @@ class SiteController extends RController
             $page->parseContent();
         }
         $content = $this->renderPartial("projects", array("page" => $page), true);
-//        $cache->set("page", "project", $content);
+        $cache->set("page", "project", $content);
         $this->renderContent($content);
     }
 

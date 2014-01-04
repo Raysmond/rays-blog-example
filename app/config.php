@@ -31,6 +31,7 @@ return array(
     'route' => array(
         'about' => 'site/about',
         'contact' => 'site/contact',
+        'projects' => 'site/projects',
     ),
 
     'cache' => array(
