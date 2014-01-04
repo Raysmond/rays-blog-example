@@ -31,13 +31,11 @@ return array(
     'route' => array(
         'about' => 'site/about',
         'contact' => 'site/contact',
-    )
+    ),
 
-    /*
     'cache' => array(
         'cache_dir' => '/cache',
         'cache_prefix' => "cache_",
-        'cache_time' => 1800, //seconds
+        'cache_time' => 3600, //seconds
     )
-    */
 );

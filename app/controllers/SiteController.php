@@ -16,20 +16,38 @@ class SiteController extends RController
 
     public function actionIndex()
     {
+//        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
+//        if (($content = $cache->get("page", "index")) !== false) {
+//            $this->renderContent($content);
+//            return;
+//        }
         $config = Configuration::getConfiguration();
         $id = $config->getConfig("front_page_intro_id");
         $intro = $id !== null ? Post::get($id) : null;
-        if (null !== $intro) {
-            Rays::import("application.extensions.markdown.MarkDownUtil");
-            $intro->content = MarkDownUtil::parseText($intro->content);
+        if (null !== $intro && $intro->contentType === Post::TYPE_MARKDOWN) {
+            $intro->parseContent();
         }
-        $this->render("index", array("intro" => $intro));
+        $content = $this->renderPartial("index", array("intro" => $intro), true);
+//        $cache->set("page", "index", $content);
+        $this->renderContent($content);
     }
 
     public function actionAbout()
     {
-        $aboutPage = Page::get(5);
-        $this->render("about", array('page' => $aboutPage));
+//        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
+//        if (($content = $cache->get("page", "about")) !== false) {
+//            $this->renderContent($content);
+//            return;
+//        }
+        $config = Configuration::getConfiguration();
+        $id = $config->getConfig("about_page_id");
+        $page = $id !== null ? Post::get($id) : null;
+        if (null !== $page && $page->contentType === Post::TYPE_MARKDOWN) {
+            $page->parseContent();
+        }
+        $content = $this->renderPartial("about", array("page" => $page), true);
+//        $cache->set("page", "about", $content);
+        $this->renderContent($content);
     }
 
     public function actionContact()
@@ -70,14 +88,20 @@ class SiteController extends RController
 
     public function actionProjects()
     {
+//        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
+//        if (($content = $cache->get("page", "project")) !== false) {
+//            $this->renderContent($content);
+//            return;
+//        }
         $config = Configuration::getConfiguration();
         $id = $config->getConfig("project_page_id");
         $page = $id !== null ? Post::get($id) : null;
-        if (null !== $page) {
-            Rays::import("application.extensions.markdown.MarkDownUtil");
-            $page->content = MarkDownUtil::parseText($page->content);
+        if ($page !== null && $page->contentType === Post::TYPE_MARKDOWN) {
+            $page->parseContent();
         }
-        $this->render("projects", array("page" => $page));
+        $content = $this->renderPartial("projects", array("page" => $page), true);
+//        $cache->set("page", "project", $content);
+        $this->renderContent($content);
     }
 
     /**

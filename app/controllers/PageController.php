@@ -12,7 +12,7 @@ class PageController extends RController
 
     public function actionIndex()
     {
-        $this->render("index", array('pages' => Page::find()->where("[status]=?", Page::STATUS_PUBLISHED)->order_desc("id")->all()));
+        $this->render("index", array('pages' => Page::find("typeId", Type::TYPE_PAGE)->where("[status]=?", Page::STATUS_PUBLISHED)->order_desc("id")->all()));
     }
 
     public function actionNew()
@@ -72,8 +72,8 @@ class PageController extends RController
         $page = Rays::getParam("page", 1);
         $pageSize = Rays::getParam("pagesize", 10);
 
-        $count = Page::find()->count();
-        $pages = Page::find()->order_asc("id")->range(($page - 1) * $pageSize, $pageSize);
+        $count = Page::find("typeId", Type::TYPE_PAGE)->count();
+        $pages = Page::find("typeId", Type::TYPE_PAGE)->order_asc("id")->range(($page - 1) * $pageSize, $pageSize);
 
         $pager = new RPager("page", $count, $pageSize, RHtml::siteUrl("page/admin"), $page);
         $data = array(

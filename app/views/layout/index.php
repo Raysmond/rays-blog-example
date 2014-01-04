@@ -43,7 +43,8 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="<?= Rays::baseUrl() ?>">Home</a></li>
-                <li><a href="<?= $baseUrl ?>/blog">Blog</a></li>
+<!--                <li><a href="--><?//= $baseUrl ?><!--/blog">Blog</a></li>-->
+                <li><a href="http://blog.raysmond.com">Blog</a></li>
                 <li><a href="<?= $baseUrl ?>/projects">Projects</a></li>
                 <li><a href="<?= $baseUrl ?>/about">About</a></li>
                 <li><a href="<?= $baseUrl ?>/contact">Contact</a></li>
@@ -66,6 +67,7 @@
                                     class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><?= RHtml::linkAction("site", "Site settings", "config") ?></li>
+                                <li><?= RHtml::linkAction("cache", "Clear all cache", "clearAll") ?></li>
                                 <li class="divider"></li>
                                 <li><?= RHtml::linkAction("page", "Pages", "index") ?></li>
                             </ul>
