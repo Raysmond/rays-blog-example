@@ -1,6 +1,3 @@
-[submodule "Rays"]
-	path = Rays
-	url = git://github.com/Raysmond/Rays.git
 [submodule "framework/Rays"]
 	path = framework/Rays
 	url = git://github.com/Raysmond/Rays.git
