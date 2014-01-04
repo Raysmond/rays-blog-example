@@ -17,6 +17,6 @@ class MarkDownUtil
 //        return \Michelf\Markdown::defaultTransform($text);
 
         Rays::import("application.vendors.php-markdown.Michelf.MarkdownExtra_inc");
-        return \Michelf\MarkdownExtra::defaultTransform($text);
+        return MarkdownExtra::defaultTransform($text);
     }
 } 
