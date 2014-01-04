@@ -7,12 +7,12 @@
  */
 
 return array(
-    "name" => "Rays Framework",
+    "name" => "HelloWorld",
     "baseDir" => dirname(__FILE__),
-    "basePath" => "/RaysWeb",
-    "isCleanUrl" => true,
+    "basePath" => "/Raysmond/rays/demos/helloworld",
+    "isCleanUrl" => false,
     "layout" => "index",
     "defaultController" => 'site',
     'isDebug' => true,
-    "exceptionAction" => 'site/exception'
+    "exceptionAction"=>'site/exception'
 );

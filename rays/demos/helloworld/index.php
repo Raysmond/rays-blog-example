@@ -5,7 +5,7 @@
  * @author: Raysmond
  */
 
-$Rays = dirname(__FILE__).'/../framework/Rays/Rays/Rays.php';
+$Rays = dirname(__FILE__).'/../../../framework/Rays/Rays/Rays.php';
 $config = dirname(__FILE__).'/app/config.php';
 
 require_once($Rays);

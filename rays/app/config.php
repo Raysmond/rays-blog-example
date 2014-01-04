@@ -9,7 +9,7 @@
 return array(
     "name" => "Rays Framework",
     "baseDir" => dirname(__FILE__),
-    "basePath" => "/RaysWeb",
+    "basePath" => "/Raysmond/rays",
     "isCleanUrl" => true,
     "layout" => "index",
     "defaultController" => 'site',

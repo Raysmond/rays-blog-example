@@ -1,0 +1,120 @@
+/**
+ * Example CSS file
+ *
+ * @author: Raysmond
+ * @created: 2013-12-19
+ */
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.content{width: 100%; height: auto; background-color: #FFF; padding: 0;}
+.note {
+    background-color: #ffffff;
+    padding: 10px 0;
+    color: #333333;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container{
+}
+.container:before, .container:after {
+    display: table;
+    content: " ";
+}
+.container::after{
+    clear: both;
+}
+
+#header{
+    background: #EBEAE8;
+    padding: 15px 0;
+}
+
+ul.main-menu{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.main-menu li{
+    float: left;
+}
+
+ul.main-menu li>a{
+    display: block;
+    padding: 5px 20px;
+    text-decoration: none;
+}
+
+ul.main-menu li>a:link,ul.main-menu li>a:active,ul.main-menu li>a:visited{
+    color: #000;
+}
+
+ul.main-menu li>a:hover{
+    color: #666;
+}
+
+.alert{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#main-content{
+    min-height: 400px;
+}
+
+.clearfix{
+    clear: both;
+}
+
+#footer{
+    padding-bottom: 20px;
+    color: gray;
+}
+
+/* Post */
+.post-meta{
+    color: gray;
+}
+
+.post-content{
+    margin-top: 10px;
+}
+
+.post-actions{
+    margin-top: 10px;
+}
+
+.post-list table tr{
+    border-bottom: 1px #ccc dashed;
+}
+.post-list table tr td{
+    padding: 3px 5px;
+}
+
+/* Pagination */
+ul.pagination{
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+}
+
+ul.pagination>li{
+    float: left;
+}
+
+ul.pagination>li>a{
+    display: block;
+    padding: 5px;
+}
+
+ul.pagination>li.active>a{
+    color: red;
+}
