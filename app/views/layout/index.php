@@ -9,7 +9,6 @@
     <?php $baseUrl = Rays::baseUrl(); ?>
     <!-- Bootstrap core CSS -->
     <link href="<?= $baseUrl ?>/assets/bootstrap3.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="<?= $baseUrl ?>/assets/bootstrap3.0/css/non-responsive.css" rel="stylesheet"/>
     <link href="<?= $baseUrl ?>/assets/css/main.css" rel="stylesheet"/>
     <!-- Custom css -->
     <?= RHtml::linkCssArray(Rays::app()->client()->css); ?>
@@ -70,6 +69,7 @@
                                 <li><?= RHtml::linkAction("cache", "Clear all cache", "clearAll") ?></li>
                                 <li class="divider"></li>
                                 <li><?= RHtml::linkAction("page", "Pages", "index") ?></li>
+                                <li><?= RHtml::linkAction("post", "Posts", "index") ?></li>
                             </ul>
                         </li>
                         <?php
@@ -103,7 +103,7 @@
     <hr>
     <?php $time = (microtime(true) - Rays::$startTime) * 1000; ?>
     Copyright &copy; Raysmond 2011-2013. All Right Reserved.
-    <span>&nbsp;&nbsp;In <?= sprintf("%.2f", (microtime(true) - Rays::$startTime) * 1000); ?> ms.</span>
+    <span>&nbsp;&nbsp;-- <?= sprintf("%.2f", (microtime(true) - Rays::$startTime) * 1000); ?> ms.</span>
     <span style="float: right;">Theme based on <a href="http://getbootstrap.com/">Bootstrap</a> and powered by <a
             href="https://github.com/Raysmond/Rays">Rays</a></span>
 </div>

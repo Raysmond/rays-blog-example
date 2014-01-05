@@ -12,7 +12,6 @@
     if (Rays::isLogin() && Rays::user()->role === User::ADMIN) {
         echo "Actions: ";
         echo RHtml::linkAction('page', "Edit", "edit", $page->id);
-        echo "&nbsp;&nbsp;".RHtml::linkAction('page', "Delete", "delete", $page->id);
     }
     ?>
 </div>

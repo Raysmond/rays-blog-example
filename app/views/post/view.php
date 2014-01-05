@@ -11,11 +11,8 @@
 <div class="post-actions">
     <?php
     if (Rays::isLogin() && (Rays::user()->id == $post->uid || Rays::user()->role == "admin")) {
-
         echo "Actions &nbsp;";
         echo RHtml::linkAction("post", "Edit", "edit", $post->id);
-        echo "&nbsp;&nbsp;";
-        echo RHtml::linkAction("post", "Delete", "delete", $post->id);
     }
     ?>
 </div>
