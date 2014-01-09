@@ -27,9 +27,12 @@ class PageController extends RController
             // use markdown syntax
             $page->contentType = Page::TYPE_MARKDOWN;
             if ($page->validate("new")) {
-                if (($id = $page->save()) !== false)
+                if (($id = $page->save()) !== false) {
+                    if (($alias = $this->processPageUrl($id)) !== null) {
+                        $this->redirect(RHtml::siteUrl($alias->aliasUrl));
+                    }
                     $this->redirectAction("page", "view", $id);
-                else
+                } else
                     $this->flash("error", "Unexpected error!");
             } else
                 $data['errors'] = $page->getErrors();
@@ -48,6 +51,28 @@ class PageController extends RController
         $this->render("view", array('page' => $page));
     }
 
+    private function processPageUrl($pid)
+    {
+        $urlAlias = Rays::getParam("custom_url_alias", null);
+        if (($urlAlias = trim($urlAlias))) {
+            $check = UrlAlias::find("aliasUrl", $urlAlias)->first();
+            if ($check !== null) {
+                $urlAlias .= "-".date("Y-m-d-H-i-s");
+            }
+
+            $alias = UrlAlias::find("source", "page/view/{$pid}")->first();
+            if ($alias === null)
+                $alias = new UrlAlias(array('source' => "page/view/{$pid}", "aliasUrl" => $urlAlias));
+            else
+                $alias->aliasUrl = $urlAlias;
+            if ($alias->validate_save() !== false)
+                return $alias;
+        } else {
+            UrlAlias::where("[source]=?", array("page/view/{$pid}"))->delete();
+        }
+        return null;
+    }
+
     public function actionEdit($pid)
     {
         $page = Page::get($pid);
@@ -58,13 +83,16 @@ class PageController extends RController
             $page1->set($_POST);
             $page1->updateTime = date('Y-m-d H:i:s');
             if ($page1->save() !== false) {
+                if (($alias = $this->processPageUrl($page1->id)) !== null) {
+                    $this->redirect(RHtml::siteUrl($alias->aliasUrl));
+                }
                 $this->redirectAction("page", "view", $page->id);
             } else {
                 $this->render("edit", array('page' => $page, 'form' => $_POST, 'errors' => $page1->getErrors()));
             }
         }
 
-        $this->render("edit", array("page" => $page));
+        $this->render("edit", array("page" => $page, "uri" => UrlAlias::find("source", "page/view/{$page->id}")->first()));
     }
 
     public function actionAdmin()

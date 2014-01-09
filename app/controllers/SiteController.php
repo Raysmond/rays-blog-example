@@ -111,24 +111,13 @@ class SiteController extends RController
     public function actionException(Exception $e)
     {
         if ($e instanceof RPageNotFoundException || $e->getCode() === 404) {
-            // TODO load routing at initialization
-            $config = Configuration::getConfiguration();
-            $routes = $config->getConfig("custom_routing");
-            if ($routes !== null) {
-                $routes = explode("\n", $routes);
-                foreach ($routes as $route) {
-                    if (($pos = strpos($route, "=")) !== false) {
-                        $uri = trim(substr($route, 0, $pos));
-                        $routingUri = trim(substr($route, $pos + 1));
-                        if ($uri === Rays::uri()) {
-                            $router = new RRouter();
-                            Rays::app()->runController($router->getRouteUrl($routingUri));
-                            exit;
-                        }
-                    }
-                }
+            $urlAlias = UrlAlias::find("aliasUrl", Rays::uri())->first();
+            if ($urlAlias !== null) {
+                $uri = $urlAlias->source;
+                $router = new RRouter();
+                Rays::app()->runController($router->getRouteUrl($uri));
+                exit;
             }
-
             $this->setHeaderTitle("404");
             $this->renderContent("<div class='page-header'><h1>404, page not found!</h1></div>");
             return;

@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Raysmond blog">
     <meta name="author" content="Raysmond, Jiankun Lei, 雷建坤">
 
@@ -23,12 +25,13 @@
     <![endif]-->
 </head>
 
-<body class="page-<?=Rays::router()->getControllerId() . "-" . Rays::router()->getActionId()?>">
+<body class="page-<?= Rays::router()->getControllerId() . "-" . Rays::router()->getActionId() ?>">
 
 <!-- Fixed navbar -->
 <div id="main-nav" class="navbar navbar-default navbar-fixed-top">
     <span
-        id="cur_uri" style="display: none;"><?= $baseUrl . "/" . Rays::router()->getControllerId() . "/" . Rays::router()->getActionId() ?></span>
+        id="cur_uri"
+        style="display: none;"><?= $baseUrl . "/" . Rays::router()->getControllerId() . "/" . Rays::router()->getActionId() ?></span>
 
     <div class="container">
         <div class="navbar-header">
@@ -42,7 +45,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="<?= Rays::baseUrl() ?>">Home</a></li>
-<!--                <li><a href="--><?//= $baseUrl ?><!--/blog">Blog</a></li>-->
+                <!--                <li><a href="--><?//= $baseUrl ?><!--/blog">Blog</a></li>-->
                 <li><a href="http://blog.raysmond.com">Blog</a></li>
                 <li><a href="<?= $baseUrl ?>/projects">Projects</a></li>
                 <li><a href="<?= $baseUrl ?>/about">About</a></li>
@@ -59,7 +62,7 @@
                             <li><?= RHtml::linkAction('user', "Logout", 'logout') ?></li>
                         </ul>
                     </li>
-                    <?php if(Rays::user()->role === User::ADMIN){
+                    <?php if (Rays::user()->role === User::ADMIN) {
                         ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuration <b
@@ -72,13 +75,8 @@
                                 <li><?= RHtml::linkAction("post", "Posts", "index") ?></li>
                             </ul>
                         </li>
-                        <?php
+                    <?php
                     } ?>
-                <?php
-                } else {
-                    ?>
-<!--                    <li>--><?//= RHtml::linkAction('user', "Login", 'login') ?><!--</li>-->
-<!--                    <li>--><?//= RHtml::linkAction('user', "Register", 'register') ?><!--</li>-->
                 <?php
                 }
                 ?>
@@ -108,11 +106,13 @@
             href="https://github.com/Raysmond/Rays">Rays</a></span>
 </div>
 <div style="display: none;">
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5076875'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s25.cnzz.com/stat.php%3Fid%3D5076875' type='text/javascript'%3E%3C/script%3E"));</script>
+    <script
+        type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_5076875'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s25.cnzz.com/stat.php%3Fid%3D5076875' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Custom JavaScript  -->
-<script src="<?=$baseUrl?>/assets/js/main.js"></script>
+<script src="<?= $baseUrl ?>/assets/js/main.js"></script>
 <?= RHtml::linkScriptArray(Rays::app()->client()->script); ?>
 </body>
 </html>

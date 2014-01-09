@@ -1,6 +1,7 @@
 body {
     font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif;
     line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
     padding-top: 70px;
     padding-bottom: 30px;
 }
