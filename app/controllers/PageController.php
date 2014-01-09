@@ -44,10 +44,8 @@ class PageController extends RController
     {
         $page = Page::get($pid);
         RAssert::not_null($page);
-        if ($page->contentType == Page::TYPE_MARKDOWN) {
-            Rays::import("application.extensions.markdown.MarkDownUtil");
-            $page->content = MarkDownUtil::parseText($page->content);
-        }
+        $page->parseContent();
+
         $this->render("view", array('page' => $page));
     }
 
@@ -57,7 +55,7 @@ class PageController extends RController
         if (($urlAlias = trim($urlAlias))) {
             $check = UrlAlias::find("aliasUrl", $urlAlias)->first();
             if ($check !== null) {
-                $urlAlias .= "-".date("Y-m-d-H-i-s");
+                $urlAlias .= "-" . date("Y-m-d-H-i-s");
             }
 
             $alias = UrlAlias::find("source", "page/view/{$pid}")->first();

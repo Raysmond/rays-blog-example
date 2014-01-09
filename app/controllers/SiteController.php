@@ -32,24 +32,6 @@ class SiteController extends RController
         $this->renderContent($content);
     }
 
-    public function actionAbout()
-    {
-        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
-        if (($content = $cache->get("page", "about")) !== false) {
-            $this->renderContent($content);
-            return;
-        }
-        $config = Configuration::getConfiguration();
-        $id = $config->getConfig("about_page_id");
-        $page = $id !== null ? Post::get($id) : null;
-        if (null !== $page && $page->contentType === Post::TYPE_MARKDOWN) {
-            $page->parseContent();
-        }
-        $content = $this->renderPartial("about", array("page" => $page), true);
-        $cache->set("page", "about", $content);
-        $this->renderContent($content);
-    }
-
     public function actionContact()
     {
         if (Rays::isPost()) {
@@ -84,24 +66,6 @@ class SiteController extends RController
             }
         }
         $this->render("config", array('config' => ($config === null ? null : $config->value)));
-    }
-
-    public function actionProjects()
-    {
-        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
-        if (($content = $cache->get("page", "project")) !== false) {
-            $this->renderContent($content);
-            return;
-        }
-        $config = Configuration::getConfiguration();
-        $id = $config->getConfig("project_page_id");
-        $page = $id !== null ? Post::get($id) : null;
-        if ($page !== null && $page->contentType === Post::TYPE_MARKDOWN) {
-            $page->parseContent();
-        }
-        $content = $this->renderPartial("projects", array("page" => $page), true);
-        $cache->set("page", "project", $content);
-        $this->renderContent($content);
     }
 
     /**
