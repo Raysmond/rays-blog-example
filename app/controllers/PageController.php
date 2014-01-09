@@ -42,31 +42,39 @@ class PageController extends RController
 
     public function actionView($pid)
     {
-        $page = Page::get($pid);
-        RAssert::not_null($page);
-        $page->parseContent();
+        $cache = new RCacheFile(Rays::app()->getConfig("cache"));
+        if (!Rays::isLogin() && ($content = $cache->get("page.pages", "p$pid")) !== false) {
+            $this->renderContent($content);
+        } else {
+            $page = Page::get($pid);
+            RAssert::not_null($page);
+            $page->parseContent();
 
-        $this->render("view", array('page' => $page));
+            $content = $this->renderPartial("view", array('page' => $page), true);
+            $cache->set("page.pages", "p$pid", $content);
+            $this->renderContent($content);
+        }
     }
 
     private function processPageUrl($pid)
     {
         $urlAlias = Rays::getParam("custom_url_alias", null);
+        $source = "page/view/{$pid}";
         if (($urlAlias = trim($urlAlias))) {
             $check = UrlAlias::find("aliasUrl", $urlAlias)->first();
-            if ($check !== null) {
+            if ($check !== null && $check->source !== $source) {
                 $urlAlias .= "-" . date("Y-m-d-H-i-s");
             }
 
-            $alias = UrlAlias::find("source", "page/view/{$pid}")->first();
+            $alias = UrlAlias::find("source", $source)->first();
             if ($alias === null)
-                $alias = new UrlAlias(array('source' => "page/view/{$pid}", "aliasUrl" => $urlAlias));
+                $alias = new UrlAlias(array('source' => $source, "aliasUrl" => $urlAlias));
             else
                 $alias->aliasUrl = $urlAlias;
             if ($alias->validate_save() !== false)
                 return $alias;
         } else {
-            UrlAlias::where("[source]=?", array("page/view/{$pid}"))->delete();
+            UrlAlias::where("[source]=?", array($source))->delete();
         }
         return null;
     }

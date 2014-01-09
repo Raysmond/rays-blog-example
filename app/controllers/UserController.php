@@ -12,7 +12,7 @@ class UserController extends RController
      * @var array access array for actions
      */
     public $access = array(
-        User::AUTHENTICATED => array("logout")
+        User::AUTHENTICATED => array("logout", "edit")
     );
 
     public function actionLogin()
@@ -66,6 +66,18 @@ class UserController extends RController
     {
         Rays::app()->logout();
         $this->redirect(Rays::baseUrl());
+    }
+
+    public function actionEdit($uid)
+    {
+        $user = User::get($uid);
+        RAssert::not_null($user);
+
+        if (Rays::user()->id === $user->id || Rays::user()->role === User::ADMIN) {
+            // todo
+            $this->renderContent("TODO");
+//            $this->render("edit",array('user'=>$user));
+        }
     }
 
     public function actionView($uid = null)

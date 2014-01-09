@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Raysmond blog">
+    <meta name="keywords" content="<?= Configuration::getConfiguration()->getConfig("keyword") ?>">
     <meta name="author" content="Raysmond, Jiankun Lei, 雷建坤">
 
     <title><?= RHtml::encode(Rays::app()->client()->getHeaderTitle()) ?></title>

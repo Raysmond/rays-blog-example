@@ -1,11 +1,12 @@
 <?php $self->setHeaderTitle($page->title); ?>
 
 <div class="page-header"><h1><?= RHtml::encode($page->title) ?></h1></div>
-<div class="page-meta">
-    <?= $page->createTime ?>
-</div>
 <div class="page-content">
     <?= $page->content ?>
+</div>
+<div class="page-meta">
+    ---------------- <br/>
+    Updated at <?= $page->updateTime ?>
 </div>
 <div class="actions">
     <?php

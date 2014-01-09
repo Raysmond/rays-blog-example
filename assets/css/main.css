@@ -126,7 +126,17 @@ div.mylinks > ul > li {
     padding: 0 15px;
 }
 
+/* page */
+.page-content{
+
+}
+
+.page-meta{
+    color: gray;
+}
+
 /* footer */
 #footer{
     color: gray;
 }
+

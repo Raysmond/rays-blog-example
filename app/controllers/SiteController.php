@@ -78,8 +78,7 @@ class SiteController extends RController
             $urlAlias = UrlAlias::find("aliasUrl", Rays::uri())->first();
             if ($urlAlias !== null) {
                 $uri = $urlAlias->source;
-                $router = new RRouter();
-                Rays::app()->runController($router->getRouteUrl($uri));
+                Rays::app()->runController(Rays::router()->getRouteUrl($uri));
                 exit;
             }
             $this->setHeaderTitle("404");
