@@ -12,7 +12,7 @@ class UserController extends RController
      * @var array access array for actions
      */
     public $access = array(
-        User::AUTHENTICATED => array("logout", "edit")
+        User::AUTHENTICATED => array("logout", "edit", "changePassword")
     );
 
     public function actionLogin()
@@ -74,10 +74,35 @@ class UserController extends RController
         RAssert::not_null($user);
 
         if (Rays::user()->id === $user->id || Rays::user()->role === User::ADMIN) {
-            // todo
-            $this->renderContent("TODO");
-//            $this->render("edit",array('user'=>$user));
+            $this->render("edit", array('user' => $user));
         }
+    }
+
+    public function actionChangePassword()
+    {
+        $data = array("user" => Rays::user());
+        if (Rays::isPost()) {
+            $user = Rays::user();
+            if ($user->password === md5(@$_POST["old-password"])) {
+                $validation = new RValidation(
+                    array("label" => "New password", "field" => "new-password", "rules" => "trim|required|max_length[255]"),
+                    array("label" => "New password confirm", "field" => "new-password-confirm", "rules" => "trim|required|max_length[255]|equals[new-password]")
+                );
+                if ($validation->run($_POST)) {
+                    $user->password = md5($_POST["new-password"]);
+                    if ($user->save()) {
+                        $this->flash("message", "Password changed successfully.");
+                        $this->redirectAction("user", "view", $user->id);
+                    }
+                } else {
+                    $data["errors"] = $validation->getErrors();
+                    $this->flash("error", "New password is required and must be equal to new password confirm field!");
+                }
+            } else {
+                $this->flash("error", "Old password is not correct!");
+            }
+        }
+        $this->render("change_password", $data);
     }
 
     public function actionView($uid = null)
