@@ -34,13 +34,25 @@ class SiteController extends RController
 
     public function actionContact()
     {
+        $this->setHeaderTitle("Contact");
+        $data = array();
         if (Rays::isPost()) {
             // do some thing
-
-            $this->flash("message", "Thanks for your contact!");
+            $validation = new RValidation(array(
+                array("field" => "name", "label" => "Name", "rules" => "trim|required"),
+                array("field" => "email", "label" => "Email", "rules" => "trim|required"),
+                array("field" => "subject", "label" => "Subject", "rules" => "trim|required"),
+                array("field" => "content", "label" => "Content", "rules" => "trim|required"),
+            ));
+            if ($validation->run($_POST)) {
+                Rays::import("application.extensions.phpmailer.MailHelper");
+                MailHelper::sendEmail($_POST["subject"] . " - from Raysmond.com", $_POST["content"], Configuration::getConfiguration()->getConfig("site_email"), $_POST["name"], $_POST["email"]);
+                $this->flash("message", "Thanks for your contact!");
+            } else {
+                $data["errors"] = $validation->getErrors();
+            }
         }
-        $this->setHeaderTitle("Contact");
-        $this->render("contact");
+        $this->render("contact", $data);
     }
 
     public function actionConfig()
