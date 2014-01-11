@@ -54,6 +54,7 @@ class PageController extends RController
             $cache->set("page.pages", "p$pid", $content);
             $this->renderContent($content);
         }
+        Counter::increaseCounter(Page::TYPE_PAGE, $pid);
     }
 
     private function processPageUrl($pid)
@@ -119,4 +120,5 @@ class PageController extends RController
         $this->setHeaderTitle("Pages administration");
         $this->render($data);
     }
-} 
+
+}
