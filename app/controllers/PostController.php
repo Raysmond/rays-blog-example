@@ -10,7 +10,9 @@ class PostController extends RController
 {
     // Access rules
     public $access = array(
-        User::AUTHENTICATED => array("index", "new", "edit", "delete")
+        // User::AUTHENTICATED => array("index", "new", "edit", "delete")
+        // I don't allow users to create or edit any posts.
+        User::ADMIN => array("index", "new", "edit", "delete")
     );
 
     // My posts

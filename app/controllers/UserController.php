@@ -8,9 +8,6 @@
 
 class UserController extends RController
 {
-    /**
-     * @var array access array for actions
-     */
     public $access = array(
         User::AUTHENTICATED => array("logout", "edit", "changePassword")
     );
@@ -96,7 +93,6 @@ class UserController extends RController
                     }
                 } else {
                     $data["errors"] = $validation->getErrors();
-                    $this->flash("error", "New password is required and must be equal to new password confirm field!");
                 }
             } else {
                 $this->flash("error", "Old password is not correct!");

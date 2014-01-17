@@ -42,6 +42,7 @@ class PageController extends RController
 
     public function actionView($pid)
     {
+        Counter::increaseCounter(Page::TYPE_PAGE, $pid);
         $cache = new RCacheFile(Rays::app()->getConfig("cache"));
         if (!Rays::isLogin() && ($content = $cache->get("page.pages", "p$pid")) !== false) {
             $this->renderContent($content);
@@ -51,10 +52,10 @@ class PageController extends RController
             $page->parseContent();
 
             $content = $this->renderPartial("view", array('page' => $page), true);
-            $cache->set("page.pages", "p$pid", $content);
+            if (!Rays::isLogin())
+                $cache->set("page.pages", "p$pid", $content);
             $this->renderContent($content);
         }
-        Counter::increaseCounter(Page::TYPE_PAGE, $pid);
     }
 
     private function processPageUrl($pid)

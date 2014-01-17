@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Raysmond
- * Date: 14-1-11
- * Time: AM10:50
+ * Counter model
+ *
+ * @author: Raysmond
+ * @created: 2014-01-11
  */
 
 class Counter extends RModel
@@ -39,7 +39,7 @@ class Counter extends RModel
             $counter->totalCount++;
             $counter->timestamp = date("Y-m-d H:i:s");
             $counter->save();
-        } else {
+        } else if (Post::get($postId) !== null) {
             $counter = new Counter(array(
                 "dayCount" => 1,
                 "totalCount" => 1,
