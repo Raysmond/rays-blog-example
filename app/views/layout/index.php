@@ -101,7 +101,7 @@
 <div id="footer" class="container">
     <hr>
     <?php $time = (microtime(true) - Rays::$startTime) * 1000; ?>
-    Copyright &copy; Raysmond 2011-2013. All Right Reserved.
+    Copyright &copy; Raysmond 2011-2014. All Right Reserved.
     <span>&nbsp;&nbsp;-- <?= sprintf("%.2f", (microtime(true) - Rays::$startTime) * 1000); ?> ms.</span>
     <span style="float: right;">Theme based on <a href="http://getbootstrap.com/">Bootstrap</a> and powered by <a
             href="https://github.com/Raysmond/Rays">Rays</a></span>
