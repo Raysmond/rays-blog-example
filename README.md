@@ -4,6 +4,7 @@ Raysmond
 ## About
 * Source code of my personal website: http://raysmond.com. 
 * A good example using [Rays](https://github.com/Raysmond/Rays) framework.
+* No longer used because I'm using Drupal instead.
 
 ## Vendors
 * [php-markdown](https://github.com/michelf/php-markdown)
